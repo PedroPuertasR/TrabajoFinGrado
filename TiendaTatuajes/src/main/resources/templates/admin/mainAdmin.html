@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="En esta zona podemos acceder a las diferentes gestiones de nuestra página: 
+	 mostrar zonas, mostrar salas y mostrar citas. Además podemos volver a la zona de usuario para observar nuestro index.">
+  <meta name="author" content="Pedro Puertas Rodríguez">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}" media="screen" type="text/css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <title>Admin - Brew Tattoos</title>
+</head>
+
+<body>
+  <nav th:replace="~{fragmentos/navbarAdmin::navbar}">
+
+  </nav>
+
+  <main class="container principalAdmin">
+
+    <div id="inicioAdmin" class="d-flex justify-content-center mt-5">
+      <img src="/img/logo.png" alt="Logo Brew Tattoos">
+    </div>
+
+    <article class="d-flex justify-content-center mt-3">
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row m-4">
+          <a th:href="@{/admin/zonas}" href="zonas">
+            <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+              Mostrar zonas
+            </button>
+          </a>
+          <a th:href="@{/admin/citas}" href="citas">
+            <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+              Mostrar citas
+            </button>
+          </a>
+        </div>
+
+        <div class="d-flex justify-content-center m-4" sec:authorize="isAuthenticated()">
+          <a th:href="@{/admin/salas}" href="salas"><button type="button"
+              class="btn btn-light button-main-admin mt-4 me-5 ms-4">Mostrar
+              salas</button></a>
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer th:replace="~{fragmentos/footer::footer}">
+
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,297 @@
+@font-face {
+    font-family: 'Antic Slab';
+    src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+}
+
+body{
+    background-color: black;
+}
+
+h1, p{
+    color: white;
+    font-family: 'Antic Slab';
+    font-size: 14pt;
+}
+
+.mensajeError{
+	visibility: hidden;
+}
+
+#infoEstudio p{
+    font-size: 18pt;
+}
+
+.bg-navbar{
+    background-color: rgb(47, 47, 48);
+}
+
+.card-title{
+    font-weight: 700;
+}
+
+.card{
+    border-color: rgb(122, 122, 122);
+    background-color: black;
+}
+
+#logoMenu, #logoMenuAdmin{
+    height: 60px;
+}
+
+#menu, #menuAdmin, #menuLogin{
+    font-family: 'Raleway', sans-serif, Arial;
+    font-size: 14pt;
+    color: white;
+    border-color: rgb(47, 47, 48)!important;
+}
+
+.espacio{
+    background-size: cover;
+    background-position: 50%;
+    min-height: 600px;
+    position: relative;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,.2);
+    margin-top: 50px;
+}
+
+.espacio2{
+    background-size: cover;
+    background-position: 50%;
+    min-height: 200px;
+    position: relative;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,.2);
+    margin-top: 50px;
+}
+
+.espacio3{
+    min-height: 200px;
+    position: relative;
+    color: white;
+    margin-top: 50px;
+}
+
+.espacio h1, .espacio2 h1, .espacio3 h1{
+    font-size: 46pt;
+    background-color:rgba(0, 0, 0, 0.2);
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.color-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+#inicio img, #inicioAdmin img{
+    width: 20%;
+}
+
+#logoLogin{
+	width: 15%;
+}
+
+#cita{
+    width: 600px;
+    color: white;
+    font-family: 'Raleway', sans-serif, Arial;
+}
+
+.formularioAniadir{
+    background-color: rgb(47, 47, 48);
+    color: white;
+    font-family: 'Raleway', sans-serif, Arial;
+    width: 800px;
+}
+
+.formularioBuscar{
+    color: white;
+    background-color: black;
+    font-family: 'Raleway', sans-serif, Arial;
+    width: 300px;
+}
+
+.form-buscar input{
+	height: 100%;	
+}
+
+#cita form{
+    background-color: rgb(47, 47, 48);
+}
+
+#cita .btn:hover, .btn-light:hover, .dropdown:hover, #formularioAniadir .btn:hover, .btn-enviar:hover, td a:hover{
+    background-color: black;
+    border-color: white;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-warning{
+	font-weight: 900;
+}
+
+input{
+    background-color: rgb(170, 170, 170);
+}
+
+input::placeholder{
+    color: black;
+}
+
+textarea{
+    background-color: rgb(170, 170, 170)!important;
+}
+
+textarea::placeholder{
+    color: black!important;
+}
+
+#foto{
+    background-color: rgb(47, 47, 48);
+}
+
+.card{
+    width: 300px;
+}
+
+iframe{
+    width: 1250px;
+    height: 650px;
+    border: 0 auto;
+}
+
+footer img{
+    width: 20%;
+}
+
+footer p{
+    font-size: 16pt;
+    color: black;
+}
+
+footer{
+    background-color: white;
+}
+
+.form-control{
+	background-color: rgb(170, 170, 170);
+}
+
+.formularioLogin{
+    background-color: rgb(47, 47, 48);
+    color: white;
+    font-family: 'Raleway', sans-serif, Arial;
+    width: 300px;
+    padding: 30px;
+}
+
+.button-main-admin{
+    width: 300px;
+    height: 150px;
+    font-size: 26pt;
+    font-family: 'Raleway', sans-serif, Arial;
+}
+
+@media (max-height: 740px){
+    .espacio, .espacio2, .espacio3{
+        min-height: 30vh;
+    }
+
+    .espacio h1, .espacio2 h1, .espacio3 h1{
+        font-size: calc(1.525rem + 3.3vw);
+    }
+
+    .espacio3{
+        margin-top: 0px!important;
+        margin-bottom: 0px!important;
+    }
+
+    #map-container-google-1 iframe{
+        width: 90%;
+        height: 60%;
+    }
+
+    #inicio img{
+        width: 55%;
+    }
+
+    #cartasRow, #cartasRow2{
+    	display: flex!important;
+    	flex-direction: column!important;
+    	margin: 0 auto!important;
+    	justify-content: center!important;
+    }
+
+	.card{
+		width: 60%;
+	}
+
+    .card p, .card a{
+        font-size: 10pt;
+    }
+
+    #cita{
+        font-size: calc(0.485rem + 0.6vw);
+        width: 300px;
+    }
+
+    #cita button{
+        width: 30%;
+        font-size: 10pt;
+    }
+
+    #cita p{
+        font-size: 10pt;
+    }
+
+    #infoEstudio p{
+        font-size: 14pt;
+    }
+
+    footer img{
+        width: 50%;
+    }
+    
+    footer p{
+        font-size: 10pt;
+        color: black;
+    }
+
+    .button-main-admin{
+        width: 70%;
+        height: 100%;
+        font-size: large;
+        margin-top: 0%!important;
+        margin-bottom: 0%!important;
+    }
+
+    #inicioAdmin img{
+        width: 60%;
+    }
+    
+    table tbody button i, table tbody a i{
+    	font-size: 10pt;
+    }
+    
+    #logoLogin{
+    	width: 50%;
+    }
+    
+    #formularioCitaAdmin, #formularioCitaAdmin input, #formularioCitaAdmin select{
+    	width: 100%;
+    	font-size: 10pt;
+    }
+    
+    .dropdown-item{
+    	font-size: 8pt;
+    }
+    
+}
