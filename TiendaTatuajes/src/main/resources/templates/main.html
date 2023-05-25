@@ -174,8 +174,8 @@
 				<h1 class="text-center">Pide cita</h1>
 			</div>
 
-			<form id="formularioCita" name="Formulario de reserva" method="GET" data-aos="fade-up"
-				onsubmit="return revisarFormularioCita()">
+			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita()" action="https://formsubmit.co/el/sejivu">
+			<!--<form id="formularioCita" name="Formulario de reserva" method="GET" data-aos="fade-up" onsubmit="enviarEmail(); reset(); return false;">-->
 				<fieldset class="p-3">
 					<legend class="text-center">Solicitud de cita</legend>
 
@@ -205,8 +205,8 @@
 					<div class="d-flex flex-row">
 						<div class="d-flex flex-column">
 							<div class="mb-3 mt-3">
-								<label class="me-3" for="email">Email</label> <input class="border border-black-3 me-3"
-									type="email" id="email" placeholder="Introduzca su e-mail" name="email" required>
+								<label class="me-3" for="email">Email</label> 
+								<input class="border border-black-3 me-3" type="email" id="email" placeholder="Introduzca su e-mail" name="email" required>
 							</div>
 
 							<div class="mensajeError text-danger" id="errorEmail">Email no válido.</div>
@@ -215,8 +215,7 @@
 						<div class="d-flex flex-column">
 							<div class="mb-3 mt-3">
 								<label class="me-3" for="telefono">Teléfono</label>
-								<input class="border border-black-3" type="number" name="telefono" id="telefono"
-									required>
+								<input class="border border-black-3" type="number" name="telefono" id="telefono" required>
 							</div>
 
 							<div class="mensajeError text-danger" id="errorTelefono">Teléfono no válido.</div>
@@ -226,15 +225,15 @@
 					</div>
 
 					<div class="mb-3 mt-3">
-						<label class="me-3" for="ciudad">Ciudad de residencia</label> <input
-							class="border border-black-3" type="text" name="ciudad" id="ciudad" required>
+						<label class="me-3" for="ciudad">Ciudad de residencia</label> 
+						<input class="border border-black-3" type="text" name="ciudad" id="ciudad" required>
 					</div>
 
 					<div class="mensajeError text-danger" id="errorCiudad">Ciudad no válida.</div>
 
 					<div class="mb-3 mt-3">
-						<label class="me-3" for="edad">Edad</label> <input type="number" id="edad" name="edad" step="1"
-							placeholder="+18" required>
+						<label class="me-3" for="edad">Edad</label> 
+						<input type="number" id="edad" name="edad" step="1" placeholder="+18" required>
 					</div>
 
 					<div class="mensajeError text-danger" id="errorEdad">Edad no válida.</div>
@@ -242,28 +241,26 @@
 					<div class="mb-3 mt-3">
 						<label for="tatuador">¿Con quién quieres tatuarte?</label>
 						<input type="text" name="tatuador" id="tatuador" list="opciones">
-						<datalist id="opciones">
-							<option value="Wavetattoos"></option>
-							<option value="MarlenneTattoos"></option>
-							<option value="Grace Neutral"></option>
-							<option value="MannyTattoos"></option>
-						</datalist>
+							<datalist id="opciones">
+								<option value="Wavetattoos"></option>
+								<option value="MarlenneTattoos"></option>
+								<option value="Grace Neutral"></option>
+								<option value="MannyTattoos"></option>
+							</datalist>
 					</div>
 
 					<div class="mensajeError text-danger" id="errorTatuador">Tatuador no válido.</div>
 
 					<div class="mb-3 mt-3">
 						<label class="me-3" for="tamanio">Tamaño tatuaje (Aprox.)</label>
-						<input class="border border-black-3" type="number" name="tamanio" id="tamanio"
-							placeholder="En cm" required>
+						<input class="border border-black-3" type="number" name="tamanio" id="tamanio" placeholder="En cm" required>
 					</div>
 
 					<div class="mb-2 mensajeError text-danger" id="errorTamanio">Tamaño no válido.</div>
 
 					<div class="mb-3">
 						<label class="me-3" for="idea">Idea del tatuaje</label>
-						<textarea class="form-control" id="idea" cols="10" rows="5" name="idea"
-							placeholder="Idea detallada del tatuaje" required>
+						<textarea class="form-control" id="idea" cols="10" rows="5" name="idea" placeholder="Idea detallada del tatuaje" required>
             			</textarea>
 					</div>
 
@@ -293,7 +290,7 @@
 
 	<footer th:replace="~{fragmentos/footer::footer}"> </footer>
 
-	<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<!--<script src="https://smtpjs.com/v3/smtp.js"></script>-->
 
 	<script>
 		AOS.init();

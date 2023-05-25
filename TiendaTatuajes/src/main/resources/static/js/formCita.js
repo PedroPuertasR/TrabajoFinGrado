@@ -106,3 +106,17 @@ function cambiarApariencia(campo, estado){
 	}
 		
 }
+
+function enviarEmail(){
+    Email.send({
+        Host : "smtp.gmail.com",
+        Username : "pruebatattoodam@gmail.com",
+        Password : "trabajofinal",
+        To : "pruebatattoodam@gmail.com",
+        From : document.getElementById("email").value,
+        Subject : "Nueva cita",
+        Body : "Hola",
+    }).then(
+        message => alert("Mensaje enviado")
+    );
+}
