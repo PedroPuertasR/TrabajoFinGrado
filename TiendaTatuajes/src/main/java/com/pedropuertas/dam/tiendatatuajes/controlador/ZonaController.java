@@ -33,12 +33,14 @@ public class ZonaController {
 	@GetMapping ("/zonas")
 	public String mostrarZonas(Model model) {
 		model.addAttribute("listaZona", zona.findAll());
+		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/mostrarZonas";
 	}
 	
 	@GetMapping("/nuevaZona")
 	public String addZona(Model model) {
 		model.addAttribute("zona", new Zona());
+		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/formularioZona";
 	}
 	
@@ -54,6 +56,7 @@ public class ZonaController {
 
 		if (zonaEditar != null) {
 			model.addAttribute("zona", zonaEditar);
+			model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 			return "admin/formularioZona";
 		} else {
 			return "redirect:/admin/zonas";
@@ -88,6 +91,7 @@ public class ZonaController {
 			return "redirect:/admin/zonas";
 		}else {
 			model.addAttribute("listaZona", zona.buscarPorPrecio(precio));
+			model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 			return "admin/mostrarZonas";
 		}
 	}

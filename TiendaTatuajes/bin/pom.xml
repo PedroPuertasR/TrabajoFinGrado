@@ -8,7 +8,7 @@
 		<version>2.6.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.salesianostriana.dam</groupId>
+	<groupId>com.pedropuertas.dam</groupId>
 	<artifactId>tiendatatuajes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TiendaTatuajes</name>

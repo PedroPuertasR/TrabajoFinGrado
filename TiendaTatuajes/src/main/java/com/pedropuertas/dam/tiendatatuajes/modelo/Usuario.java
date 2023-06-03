@@ -1,4 +1,4 @@
-package com.pedropuertas.dam.tiendatatuajes.seguridad;
+package com.pedropuertas.dam.tiendatatuajes.modelo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Usuario {
-
+	
 	private String username, password, rol;
 	private String nombre, apellidos;
 	

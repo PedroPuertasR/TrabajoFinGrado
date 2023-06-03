@@ -11,12 +11,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioRepository;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-    private UsuarioRepo usuarios;
+    private UsuarioRepository usuarios;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

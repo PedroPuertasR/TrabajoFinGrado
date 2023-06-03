@@ -22,9 +22,7 @@
 </head>
 
 <body>
-  <nav th:replace="~{fragmentos/navbarAdmin::navbar}">
-
-  </nav>
+  <nav th:replace="~{fragmentos/navbarAdmin::navbar}"></nav>
 
   <main class="container principalAdmin">
 
@@ -47,11 +45,24 @@
           </a>
         </div>
 
-        <div class="d-flex justify-content-center m-4" sec:authorize="isAuthenticated()">
-          <a th:href="@{/admin/salas}" href="salas"><button type="button"
-              class="btn btn-light button-main-admin mt-4 me-5 ms-4">Mostrar
-              salas</button></a>
+        <div class="d-flex justify-content-center mt-3">
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-row m-4">
+              <a th:href="@{/admin/salas}" href="salas">
+                <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+                  Mostrar salas
+                </button>
+              </a>
+
+              <a th:href="@{/admin/empleados}" href="empleados">
+                <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+                  Mostrar empleados
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
+        
       </div>
 
     </article>

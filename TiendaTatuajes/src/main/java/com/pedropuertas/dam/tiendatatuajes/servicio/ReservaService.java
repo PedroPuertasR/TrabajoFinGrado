@@ -24,13 +24,12 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 		List <Reserva> listaFinal = new ArrayList <Reserva>();
 		
 		for (Reserva r : lista) {
-			if(r.getSala().getEmpleado().toLowerCase().contains(nombre.toLowerCase())) {
+			if(r.getSala().getEmpleado().getNombre().toLowerCase().contains(nombre.toLowerCase())) {
 				listaFinal.add(r);
 			}
 		}
 		
 		return listaFinal;
-
 	}
 	
 	public int numeroReservasZona(Zona z) {
@@ -46,7 +45,7 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 		
 		List <Reserva> listaCita = lista
 				.stream()
-				.filter(x -> x.getSala().getEmpleado().toLowerCase().equalsIgnoreCase(a.getSala().getEmpleado().toLowerCase()))
+				.filter(x -> x.getSala().getEmpleado().getId() == (a.getSala().getEmpleado().getId()))
 				.filter(x -> x.getFechaReserva().isEqual(a.getFechaReserva()))
 				.collect(Collectors.toList());
 		
@@ -117,6 +116,47 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 		settearPrecioTotal(a);
 		
 		return super.edit(a);
+	}
+
+	public List<Reserva> findPendiente(List <Reserva> lista) {
+		
+		List <Reserva> listaFinal;
+		
+		listaFinal = lista
+				.stream()
+				.filter(x -> !x.isAceptado())
+				.collect(Collectors.toList());
+		
+		return listaFinal;
+		
+	}
+
+	public List<Reserva> findAceptadas(List<Reserva> lista) {
+		
+		List <Reserva> listaFinal;
+		
+		listaFinal = lista
+				.stream()
+				.filter(x -> x.isAceptado())
+				.collect(Collectors.toList());
+		
+		return listaFinal;
+		
+	}
+	
+	public boolean hayPendientes(List <Reserva> lista) {
+
+		List <Reserva> listaFinal = lista
+				.stream()
+				.filter(x -> !x.isAceptado())
+				.collect(Collectors.toList());
+		
+		if(listaFinal.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 }

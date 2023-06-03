@@ -1,8 +1,11 @@
 package com.pedropuertas.dam.tiendatatuajes.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,10 +21,8 @@ public class Sala {
 
 	@Id @GeneratedValue
 	private long id;
-	private String empleado;
 	
-	/*
-	private String foto;
-	private String redes;
-	*/
+	@OneToOne(cascade= {CascadeType.MERGE})
+	@JoinColumn(name="EMPLEADO_ID")
+	private Empleado empleado;
 }

@@ -42,6 +42,7 @@ public class Reserva {
 	private double precioDisenio;
 	private int descuento;
 	private double precioTotal;
+	private boolean aceptado;
 	
 	public double calcularTotal() {
 		return (precioDisenio + zona.getPrecioFianza()) - 1 * descuento / 100;

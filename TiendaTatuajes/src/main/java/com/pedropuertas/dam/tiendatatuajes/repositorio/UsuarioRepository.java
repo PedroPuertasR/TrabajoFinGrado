@@ -1,4 +1,4 @@
-package com.pedropuertas.dam.tiendatatuajes.seguridad;
+package com.pedropuertas.dam.tiendatatuajes.repositorio;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,10 +8,16 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
+import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
+import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
+
 @Repository
-public class UsuarioRepo {
+public class UsuarioRepository {
 
 	private List<Usuario> usuarios;
+	private List<Empleado> empleados;
+	private EmpleadoService listaEmple;
 
 	public List<Usuario> getUsuarios() {
 		return Collections.unmodifiableList(usuarios);
@@ -25,6 +31,9 @@ public class UsuarioRepo {
 	
 	@PostConstruct
 	public void init() {
+		
+		//empleados = listaEmple.findAll();
+		
 		usuarios = List.of(
 				Usuario.builder()
 					.username("admin")
@@ -33,17 +42,19 @@ public class UsuarioRepo {
 					.nombre("Pedro")
 					.apellidos("Puertas Rodríguez")
 					.build()
-				,
-				Usuario.builder()
-				.username("usuario")
-				.password("usuario")
-				.rol("USER")
-				.nombre("Manuel")
-				.apellidos("Tejado Morilla")
-				.build()
-				
-				
 				);
+		
+		/*for (Empleado emp : empleados) {
+			usuarios.add(
+					Usuario.builder()
+						.username(emp.getEmail())
+						.password(emp.getDni())
+						.rol("ADMIN")
+						.nombre(emp.getNombre())
+						.apellidos(emp.getApellidos())
+						.build()
+			);
+		}*/
 	}
 	
 }

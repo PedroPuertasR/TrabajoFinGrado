@@ -24,9 +24,7 @@
 
 <body>
 	<main>
-		<nav th:replace="~{fragmentos/navbarAdmin::navbar}">
-
-		</nav>
+		<nav th:replace="~{fragmentos/navbarAdmin::navbar}"></nav>
 
 		<article class="mt-5">
 			<div class="container mt-3">
@@ -35,7 +33,7 @@
 					No puede añadir más de dos citas con el mismo tatuador en el mismo día.
 				</p>
 
-				<h2 class="text-light text-center mb-3">Citas</h2>
+				<h1 class="text-light text-center mb-3">Citas</h1>
 
 				<div class="form-buscar p-0 mb-3 me-0 ms-0 d-flex flex-row">
 
@@ -69,11 +67,62 @@
 						</thead>
 
 						<tbody>
+							<tr>
+								<td class="separador-tabla" colspan="9">Citas pendientes</td>
+							</tr>
+
+							<tr th:each="reservaPendiente : ${listaPendiente}">
+								<td th:text="${reservaPendiente.cliente}">Cliente</td>
+								<td th:text="${reservaPendiente.fechaReserva}">Fecha</td>
+								<td th:text="${reservaPendiente.sala.empleado.nombreCompleto}">Tatuador</td>
+								<td th:text="${reservaPendiente.zona.nombreZona}">Nombre</td>
+								<td th:text="${reservaPendiente.zona.precioFianza}">Precio Fianza</td>
+								<td th:text="${reservaPendiente.precioDisenio}">Precio diseño</td>
+								<td th:text="${reservaPendiente.descuento}">Descuento</td>
+								<td th:text="${reservaPendiente.precioTotal}">Precio total</td>
+								<td>
+									<a class="btn btn-warning" href="#"
+										th:href="@{/admin/editarCita/{id}(id=${reservaPendiente.id})}">
+										<i class="bi bi-pencil"></i>
+									</a> |
+									<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+										data-bs-target="#myModal" th:attr="data-bs-target='#myModal' + ${reservaPendiente.id}">
+										<i class="bi bi-x-square"></i>
+									</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" th:id="'myModal' + ${reservaPendiente.id}" tabindex="-1"
+										aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header bg-dark">
+													<h5 class="modal-title" id="myModalLabel">¿Está seguro de borrar
+														esta reserva?</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body bg-dark">
+												</div>
+												<div class="modal-footer bg-dark">
+													<a class="btn btn-danger" th:href="@{/admin/citas}">No</a>
+													<a class="btn btn-success"
+														th:href="@{/admin/borrarCita/{id}(id=${reservaPendiente.id})}">Sí</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="separador-tabla" colspan="9">Citas confirmadas</td>
+							</tr>
+							
 							<tr th:each="reserva : ${listaReserva}">
 
 								<td th:text="${reserva.cliente}">Cliente</td>
 								<td th:text="${reserva.fechaReserva}">Fecha</td>
-								<td th:text="${reserva.sala.empleado}">Tatuador</td>
+								<td th:text="${reserva.sala.empleado.nombreCompleto}">Tatuador</td>
 								<td th:text="${reserva.zona.nombreZona}">Nombre</td>
 								<td th:text="${reserva.zona.precioFianza}">Precio Fianza</td>
 								<td th:text="${reserva.precioDisenio}">Precio diseño</td>

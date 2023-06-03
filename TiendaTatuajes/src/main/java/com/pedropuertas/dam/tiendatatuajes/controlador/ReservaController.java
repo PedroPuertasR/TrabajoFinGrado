@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Reserva;
-import com.pedropuertas.dam.tiendatatuajes.seguridad.Usuario;
-import com.pedropuertas.dam.tiendatatuajes.seguridad.UsuarioRepo;
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
+import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioRepository;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ReservaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ZonaService;
@@ -26,7 +26,7 @@ import com.pedropuertas.dam.tiendatatuajes.servicio.ZonaService;
 public class ReservaController {
 
 	@Autowired
-	private UsuarioRepo usuario;
+	private UsuarioRepository usuario;
 	
 	@Autowired
 	private ReservaService reserva;
@@ -48,15 +48,18 @@ public class ReservaController {
     		return "login-error";
     	}else {
     		model.addAttribute("usuario", user.get());
+    		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
             return "admin/mainAdmin";
     	}
 	}
 	
 	@GetMapping ("/citas")
 	public String mostrarCitas(Model model) {
-		model.addAttribute("listaReserva", reserva.findAll());
+		model.addAttribute("listaPendiente", reserva.findPendiente(reserva.findAll()));
+		model.addAttribute("listaReserva", reserva.findAceptadas(reserva.findAll()));
 		model.addAttribute("listaSala", sala.findAll());
 		model.addAttribute("listaZona", zona.findAll());
+		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/mostrarCitas";
 	}
 	
@@ -65,7 +68,7 @@ public class ReservaController {
 		model.addAttribute("reserva", new Reserva());
 		model.addAttribute("sala", sala.findAll());
 		model.addAttribute("zona", zona.findAll());
-		
+		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/formularioCita";
 	}
 	
@@ -89,6 +92,7 @@ public class ReservaController {
 			model.addAttribute("reserva", reservaEditar);
 			model.addAttribute("sala", sala.findAll());
 			model.addAttribute("zona", zona.findAll());
+			model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 			return "admin/formularioCita";
 		} else {
 			return "redirect:/admin/citas/";
@@ -115,6 +119,7 @@ public class ReservaController {
 	@GetMapping("/citas/buscar")
 	public String buscar(Model model, @RequestParam String nombre) {
 		model.addAttribute("listaReserva", reserva.buscarTatuadores(nombre, reserva.findAll()));
+		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/mostrarCitas";
 	}
 	

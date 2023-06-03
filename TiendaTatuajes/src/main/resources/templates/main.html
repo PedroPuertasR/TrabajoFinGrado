@@ -57,6 +57,19 @@
 				<button class="btn btn-light" type="button">Iniciar sesión</button>
 			</a>
 
+			<div class="dropdown me-3" sec:authorize="isAuthenticated()">
+				<button type="button" class="btn btn-light position-relative" data-bs-toggle="dropdown">
+					<i class="bi bi-bell-fill"></i>
+					<span th:unless="${existen}" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+					  <span class="visually-hidden">New alerts</span>
+					</span>
+				  </button>
+				<ul class="dropdown-menu">
+					<a th:unless="${existen}" class="dropdown-item" th:href="@{/admin/citas}">Tiene citas pendientes</a>
+					<p th:if="${existen}" class="dropdown-item">Todo tranquilo por aquí</p>
+				</ul>
+			</div>
+
 			<div class="dropdown" sec:authorize="isAuthenticated()">
 				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
 					sec:authentication="name">
@@ -83,7 +96,7 @@
 
 		<div class="espacio" style="background-image: url(img/studio2.jpg);">
 			<div class="color-overlay d-flex justify-content-center align-items-center">
-				<h1 id="estudio" class="text-center">Estudio</h1>
+				<h1 id="estudio" class="text-center titulos">Estudio</h1>
 			</div>
 		</div>
 
@@ -105,7 +118,21 @@
 					</div>
 				</div>
 
-				<div id="cartasRow" class="d-flex flex-row justify-content-center" data-aos="flip-left">
+				<div id="cartasRow">
+					<div class="card-container">
+						<div class="card border-5 text-center" th:each="emp : ${listaEmpleado}" data-aos="flip-left">
+							<img class="card-img-top mt-2" th:src="@{${emp.rutaImagen}}" th:alt="|Imagen de ${emp.artistico}|"/>
+							<div class="card-body">
+								<p class="card-title" th:text="${emp.artistico}">Nombre</p>
+								<p class="card-text" th:text="${emp.email}">Email</p>
+								<a th:href="${emp.redes}" class="btn btn-dark" target="_blank">Trabajo</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				<!--<div id="cartasRow" class="d-flex flex-row justify-content-center" data-aos="flip-left">
 					<div class="card border-5 me-5 ms-5 mb-5 text-center">
 						<img class="card-img-top mt-2" src="img/wavebuto.png" alt="Wavebuto card" />
 						<div class="card-body">
@@ -147,7 +174,7 @@
 								target="_blank">Trabajo</a>
 						</div>
 					</div>
-				</div>
+				</div>-->
 
 
 			</div>
@@ -156,7 +183,7 @@
 		<article id="mapa">
 
 			<div class="espacio3 mt-5 mb-5 d-flex justify-content-center align-items-center">
-				<h1 class="text-center">Dónde estamos</h1>
+				<h1 class="text-center titulos">Dónde estamos</h1>
 			</div>
 
 			<div id="map-container-google-1" data-aos="fade-down"
@@ -171,7 +198,7 @@
 		<article class="m-auto" id="cita">
 
 			<div class="espacio3 mt-5 mb-5 d-flex justify-content-center align-items-center">
-				<h1 class="text-center">Pide cita</h1>
+				<h1 class="text-center titulos">Pide cita</h1>
 			</div>
 
 			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita()" action="https://formsubmit.co/el/sejivu">

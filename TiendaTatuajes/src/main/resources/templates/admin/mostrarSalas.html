@@ -58,7 +58,7 @@
 						<tbody>
 							<tr th:each="sala : ${listaSala}">
 								<td th:text="${sala.id}">1</td>
-								<td th:text="${sala.empleado}">Tatuador</td>
+								<td th:text="${sala.empleado.nombreCompleto}">Tatuador</td>
 								<td>
 									<a class="btn btn-warning" href="#"
 										th:href="@{/admin/editarSala/{id}(id=${sala.id})}">
