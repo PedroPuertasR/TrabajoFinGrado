@@ -38,9 +38,9 @@
 					<div class="mb-1 mt-3 me-3">
 						<label class="me-3" for="cliente">Nombre del cliente</label>
 						<input class="border border-black-1 form-input" type="text" th:field="*{cliente}" name="cliente" id="cliente" required>
-
-						<div class="mensajeError text-danger" id="errorCliente">Nombre incorrecto.</div>
 					</div>
+
+					<div class="mensajeError text-danger" id="errorCliente">Nombre incorrecto.</div>
 
 					<div class="mb-2 d-flex flex-row">
 						<label class="form-label aceptar me-3" for="aceptado">Confirmada</label>
@@ -79,8 +79,7 @@
 								name="precioDisenio" th:field="*{precioDisenio}" required>
 						</div>
 
-						<div class="mensajeError text-danger mb-3" id="errorPrecioDisenio">Precio diseño incorrecto.
-						</div>
+						<div class="mensajeError text-danger mb-3" id="errorPrecioDisenio">Precio diseño incorrecto.</div>
 
 						<div class="mb-3 mt-3">
 							<label class="me-3" for="descuento">Descuento</label>
@@ -102,8 +101,7 @@
 						</select>
 					</div>
 
-					<div class="mensajeError text-danger" id="errorTatuador">Tatuador incorrecto. Seleccione una opción.
-					</div>
+					<div class="mensajeError text-danger" id="errorTatuador">Tatuador incorrecto. Seleccione una opción.</div>
 
 					<div class="mb-3 mt-3">
 						<a class="mb-3 me-3" th:href="@{/admin/citas}" href="citas">

@@ -247,6 +247,36 @@ footer{
     font-family: 'Raleway', sans-serif, Arial;
 }
 
+#tablaEmpleados{
+    text-align: center;
+}
+
+#tablaEmpleados img{
+    width: 20%;
+}
+
+#botones-operaciones{
+    align-items: center;
+}
+
+.boton-pag{
+    font-weight: 700;
+    border: 1px solid white;
+    background-color: #ffc107;
+    margin-bottom: 1rem;
+}
+
+.active, .boton-pag:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid #ffc107;
+    font-weight: 700;
+}
+
+.boton-pag:disabled{
+    color: rgb(85, 85, 85);
+}
+
 @media (max-height: 768px){
     .espacio, .espacio2, .espacio3{
         min-height: 30vh;

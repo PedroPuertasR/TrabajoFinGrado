@@ -14,5 +14,4 @@ public interface ReservaRepository extends JpaRepository <Reserva, Long>{
 	
 	@Query("select count(r) from Reserva r where r.sala=?1")
 	public int findNumReservasBySala(Sala sala);
-	
 }

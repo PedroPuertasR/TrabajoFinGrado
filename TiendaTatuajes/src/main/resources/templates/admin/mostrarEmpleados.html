@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="En esta página se muestra una tabla con todos los empleados que trabajan en la tienda.
+	 Podemos utilizar también los botones para añadir, editar y eliminar filas de la tabla. Además existe un buscador en el
+	 cual podemos filtrar las filas por tatuador.
+	 En caso de añadir o editar citas se nos abrirá el formulario de empleados.">
+	<meta name="author" content="Pedro Puertas Rodríguez">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+	<link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}" media="screen" type="text/css" />
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script src="/js/pagesEmpleado.js" type="text/javascript" defer></script>
+
+	<title>Mostrar empleados Brew Tattoos</title>
+</head>
+
+<body>
+	<main>
+		<nav th:replace="~{fragmentos/navbarAdmin::navbar}"></nav>
+
+		<article class="mt-5">
+			<div class="container mt-3">
+
+				<p th:if="${param.error}" class="error text-danger text-center">
+					Ha ocurrido un error.
+				</p>
+
+				<h1 class="text-light text-center mb-3">Empleados</h1>
+
+				<div class="form-buscar p-0 mb-3 me-0 ms-0 d-flex flex-row">
+
+					<form class="formularioBuscar" method="GET" th:action="@{/admin/empleados/buscar}">
+						<input class="rounded" type="text" placeholder="Nombre del tatuador" name="nombre" id="nombre"
+							th:value="${param.nombre}" />
+						<button type="submit" class="btn btn-light btn-enviar me-0">
+							Buscar
+						</button>
+					</form>
+
+					<a class="btn btn-success" href="#" th:href="@{/admin/nuevoEmpleado}">
+						<i class="bi bi-plus-square"></i>
+					</a>
+
+				</div>
+				<div class="container table-responsive">
+					<table id="tablaEmpleados" class="table table-dark table-hover tabla-paginacion">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Teléfono</th>
+								<th>Email</th>
+								<th>Nº Seg. Social</th>
+								<th>Salario</th>
+								<th>Foto</th>
+								<th>Redes</th>
+								<th>Operaciones</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="empleado : ${listaEmpleado}">
+
+								<td th:text="${empleado.artistico}">Nombre</td>
+								<td th:text="${empleado.telefono}">Teléfono</td>
+								<td th:text="${empleado.email}">Email</td>
+								<td th:text="${empleado.seguridadSocial}">Nº Seg</td>
+								<td th:text="${empleado.salario} + €">Salario</td>
+								<td>
+									<img th:src="@{'../img/' + ${empleado.foto}}" th:alt="|Foto de ${empleado.artistico}|">
+								</td>
+								<td>
+									<a th:href="${empleado.redes}" th:text="${empleado.redes}" target="_blank">Redes</a>
+								</td>
+								<td>
+									<div id="botones-operaciones" class="d-flex flex-row">
+										<a class="btn btn-warning" href="#" th:href="@{/admin/editarEmpleado/{id}(id=${empleado.id})}">
+											<i class="bi bi-pencil"></i>
+										</a> |
+										<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+											data-bs-target="#myModal" th:attr="data-bs-target='#myModal' + ${empleado.id}">
+											<i class="bi bi-x-square"></i>
+										</button>
+									</div>
+									
+
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" th:id="'myModal' + ${empleado.id}" tabindex="-1"
+										aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header bg-dark">
+													<h5 class="modal-title" id="myModalLabel">¿Está seguro de borrar
+														a este empleado?</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body bg-dark">
+												</div>
+												<div class="modal-footer bg-dark">
+													<a class="btn btn-danger" th:href="@{/admin/empleados}">No</a>
+													<a class="btn btn-success"
+														th:href="@{/admin/borrarEmpleado/{id}(id=${empleado.id})}">Sí</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</article>
+
+	</main>
+	<footer th:replace="~{fragmentos/footer::footer}">
+
+	</footer>
+</body>
+
+</html>
