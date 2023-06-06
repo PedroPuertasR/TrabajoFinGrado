@@ -154,8 +154,7 @@
 				<h1 class="text-center titulos">Pide cita</h1>
 			</div>
 
-			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita()" action="https://formsubmit.co/el/sejivu">
-			<!--<form id="formularioCita" name="Formulario de reserva" method="GET" data-aos="fade-up" onsubmit="enviarEmail(); reset(); return false;">-->
+			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita();" th:action="@{/submit}" action="#">
 				<fieldset class="p-3">
 					<legend class="text-center">Solicitud de cita</legend>
 
@@ -246,19 +245,12 @@
 
 					<div class="mb-2 mensajeError text-danger" id="errorIdea">Formato de la idea no válido.</div>
 
-					<div>
-						<label for="foto">Si tienes algún diseño, súbelo aquí:</label> <br>
-						<br>
-						<input class="mb-2" type="file" id="foto" name="foto" accept="image/*">
-					</div>
-
-					<div class="mensajeError text-danger" id="errorFoto">Extensión no válida. Solo puede usar JPG, JPEG
-						o PNG.</div>
-
 					<div class="mb-3 mt-3">
 						<p>*Nos pondremos en contacto para ajustar el día de la cita
 							vía e-mail o teléfono</p>
 					</div>
+
+					<input type="hidden" id="mensaje" name="mensaje">
 
 					<button type="submit" id="enviar" class="btn btn-light mt-3">Enviar</button>
 				</fieldset>
@@ -269,8 +261,6 @@
 	</main>
 
 	<footer th:replace="~{fragmentos/footer::footer}"> </footer>
-
-	<!--<script src="https://smtpjs.com/v3/smtp.js"></script>-->
 
 	<script>
 		AOS.init();

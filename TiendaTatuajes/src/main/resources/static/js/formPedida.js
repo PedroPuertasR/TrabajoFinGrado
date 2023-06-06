@@ -7,10 +7,7 @@ document.getElementById("edad").addEventListener("blur", comprobarEdad);
 document.getElementById("tatuador").addEventListener("blur", comprobarTatuador);
 document.getElementById("tamanio").addEventListener("blur", comprobarTamanio);
 document.getElementById("idea").addEventListener("blur", comprobarIdea);
-document.getElementById("foto").addEventListener("blur", comprobarFoto);
-//document.getElementById("enviar).addEventListener("click", enviarEmail);
-
-//formularioCita.addEventListener('submit', enviarEmail());
+document.getElementById("enviar").addEventListener("click", mensaje);
 
 function revisarformularioCita() {
     let resultado = false;
@@ -22,8 +19,7 @@ function revisarformularioCita() {
         comprobarEdad() &&
         comprobarTatuador() &&
         comprobarTamanio() &&
-        comprobarIdea() &&
-        comprobarFoto();
+        comprobarIdea();
 
     formularioCita.enviar.className = resultado ? "btn btn-success mb-2" : "btn btn-danger mb-2";
 
@@ -142,53 +138,24 @@ function comprobarIdea() {
     return resultado;
 }
 
-function comprobarFoto() {
-    let foto = formularioCita.foto;
+function mensaje() {
+    let campo = document.getElementById('mensaje');
+    
+    let mensaje = "Nombre: " + document.getElementById("nombre").value + '\n' +
+                  "Apellidos: " + document.getElementById("apellidos").value + '\n' +
+                  "Email: " + document.getElementById("email").value + '\n' +
+                  "Teléfono: " + document.getElementById("telefono").value + '\n' +
+                  "Ciudad: " + document.getElementById("ciudad").value + '\n' + 
+                  "Edad: " + document.getElementById("edad").value + '\n' +
+                  "Tatuador: " + document.getElementById("tatuador").value + '\n' +
+                  "Tamaño: " + document.getElementById("tamanio").value + '\n' +
+                  "Idea del tatuaje: " + document.getElementById("idea").value;
+                  
+    campo.value = mensaje;
 
-    let fotoValor = foto.value;
-
-    let extensiones = /(\.jpg|\.jpeg|\.png)$/i;
-
-    let resultado = false;
-
-    if (extensiones.exec(fotoValor)) {
-        resultado = true;
-    }
-
-    cambiarApariencia(foto, resultado);
-
-    return resultado;
+    alert("Mensaje enviado correctamente");
 }
 
-/*function mensaje(){
-	let mensaje = "Nombre: " + formularioCita.nombre.value + '.' +
-				  "Apellidos: " + document.getElementById("apellidos").value + '.' +
-				  "Email: " + document.getElementById("email").value + '.' +
-				  "Teléfono: " + document.getElementById("telefono").value + '.' +
-				  "Ciudad: " + document.getElementById("ciudad").value + '.' + 
-				  "Edad: " + document.getElementById("edad").value + '.' +
-				  "Tatuador: "+ document.getElementById("tatuador").value + '.' +
-				  "Tamaño: " + document.getElementById("tamanio").value + '.' +
-				  "Idea del tatuaje: " + document.getElementById("idea").value;
-				  
-	return mensaje;
-}*/
-
-/*function enviarEmail(){
-	
-	Email.send({
-	    Host : "smtp.elasticemail.com",
-	    Username : "ejemplopedropuertas@gmail.com",
-	    Password : "05A977C700E0A8A8537DD88328D68BD02953",
-	    To : 'puertas.roped22@triana.salesianos.edu',
-	    From : "ejemplopedropuertas@gmail.com",
-	    Subject : "Nueva cita",
-	    Body : mensaje()
-	}).then(
-	  alert("Mensaje enviado")
-	);
-	
-}*/
 
 function cambiarApariencia(campo, estado) {
     if (estado) {

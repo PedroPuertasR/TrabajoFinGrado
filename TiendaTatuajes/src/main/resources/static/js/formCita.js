@@ -107,7 +107,7 @@ function cambiarApariencia(campo, estado){
 		
 }
 
-function enviarEmail(){
+/*function enviarEmail(){
     Email.send({
         Host : "smtp.gmail.com",
         Username : "pruebatattoodam@gmail.com",
@@ -119,4 +119,4 @@ function enviarEmail(){
     }).then(
         message => alert("Mensaje enviado")
     );
-}
+}*/

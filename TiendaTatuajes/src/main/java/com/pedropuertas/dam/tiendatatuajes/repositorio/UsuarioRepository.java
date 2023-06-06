@@ -6,19 +6,14 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
-import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
 
 @Repository
 public class UsuarioRepository {
 
 	private List<Usuario> usuarios;
-	private List<Empleado> empleados;
-	private EmpleadoService listaEmple;
 
 	public List<Usuario> getUsuarios() {
 		return Collections.unmodifiableList(usuarios);
@@ -33,8 +28,6 @@ public class UsuarioRepository {
 	@PostConstruct
 	public void init() {
 		
-		//empleados = listaEmple.findAll();
-		
 		usuarios = List.of(
 				Usuario.builder()
 					.username("admin")
@@ -44,8 +37,14 @@ public class UsuarioRepository {
 					.apellidos("Puertas Rodríguez")
 					.build()
 				);
+	}
+	
+	/*@PostConstruct
+	public void cargarUsuarios(List <Empleado> lista, EmpleadoService empleados) {
 		
-		/*for (Empleado emp : empleados) {
+		lista = empleados.findAll();
+		
+		for (Empleado emp : lista) {
 			usuarios.add(
 					Usuario.builder()
 						.username(emp.getEmail())
@@ -55,7 +54,8 @@ public class UsuarioRepository {
 						.apellidos(emp.getApellidos())
 						.build()
 			);
-		}*/
-	}
+		}
+		
+	}*/
 	
 }
