@@ -26,50 +26,41 @@
 
   <main class="container principalAdmin">
 
-    <div id="inicioAdmin" class="d-flex justify-content-center mt-5">
-      <img src="/img/logo.png" alt="Logo Brew Tattoos">
-    </div>
+    <article id="main-admin" class="d-flex flex-row justify-content-center mt-3">
+      <div id="inicioAdmin" class="d-flex justify-content-center mt-5">
+        <img src="/img/logo.png" alt="Logo Brew Tattoos">
+      </div>
 
-    <article class="d-flex justify-content-center mt-3">
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-row m-4">
+      <div id="botones-main-admin" class="d-flex flex-column mb-5">
           <a th:href="@{/admin/zonas}" href="zonas">
-            <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+            <button type="button" class="btn button-main-admin">
               Mostrar zonas
             </button>
           </a>
           <a th:href="@{/admin/citas}" href="citas">
-            <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
+            <button type="button" class="btn button-main-admin">
               Mostrar citas
             </button>
           </a>
-        </div>
 
-        <div class="d-flex justify-content-center mt-3">
-          <div class="d-flex flex-column">
-            <div class="d-flex flex-row m-4">
-              <a th:href="@{/admin/salas}" href="salas">
-                <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
-                  Mostrar salas
-                </button>
-              </a>
+          <a th:href="@{/admin/salas}" href="salas">
+            <button type="button" class="btn button-main-admin">
+              Mostrar salas
+            </button>
+          </a>
 
-              <a th:href="@{/admin/empleados}" href="empleados">
-                <button type="button" class="btn btn-light button-main-admin mt-4 me-5 ms-4">
-                  Mostrar empleados
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-        
+          <a th:href="@{/admin/empleados}" href="empleados">
+            <button type="button" class="btn button-main-admin">
+              Mostrar empleados
+            </button>
+          </a>
       </div>
 
     </article>
 
   </main>
 
-  <footer th:replace="~{fragmentos/footer::footer}">
+  <footer th:replace="~{fragmentos/footerAdmin::footer}">
 
   </footer>
 </body>
