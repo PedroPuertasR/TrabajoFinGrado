@@ -1,5 +1,7 @@
 package com.pedropuertas.dam.tiendatatuajes.controlador;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
@@ -18,7 +21,7 @@ import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
 @Controller
 @RequestMapping("/admin")
 public class EmpleadoController {
-
+	
 	@Autowired
 	private EmpleadoService empleado;
 	
@@ -47,8 +50,8 @@ public class EmpleadoController {
 	}
 	
 	@PostMapping("/nuevoEmpleado/submit")
-	public String procesarFormulario(@ModelAttribute("empleado") Empleado a) {
-		empleado.save(a);
+	public String procesarFormulario(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException {
+		empleado.save(a, file);
 		return "redirect:/admin/empleados";
 	}
 	
@@ -67,8 +70,8 @@ public class EmpleadoController {
 	}
 
 	@PostMapping("/editarEmpleado/submit")
-	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a) {
-		empleado.edit(a);
+	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException{
+		empleado.edit(a, file);
 		return "redirect:/admin/empleados";
 	}
 

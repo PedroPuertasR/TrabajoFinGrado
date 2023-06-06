@@ -29,7 +29,7 @@
 		<article class="d-flex justify-content-center align-items-center m-5">
 			<form id="formularioEmpleadoAdmin" class="formularioAniadir" th:object="${empleado}" name="empleado" method="POST"
 				th:action="${empleado.id != 0} ? @{/admin/editarEmpleado/submit} : @{/admin/nuevoEmpleado/submit}" action="#"
-				onsubmit="return revisarFormularioEmpleadoAdmin()">
+				onsubmit="return revisarFormularioEmpleadoAdmin()" enctype="multipart/form-data">
 				<fieldset class="p-3">
 					<legend class="text-center">Empleado</legend>
 
@@ -92,8 +92,8 @@
 					<div class="mensajeError text-danger" id="errorIban">IBAN incorrecto.</div>
 
 					<div class="mb-1 mt-3 me-3">
-						<label class="me-3" for="foto">Foto</label>
-						<input class="border border-black-1 form-input" th:field="*{foto}" type="file" name="foto" id="foto" required>
+						<label class="me-3" for="image">Foto</label>
+						<input class="border border-black-1 form-input" type="file" name="image" id="image" required>
 					</div>
 
 					<div class="mensajeError text-danger" id="errorFoto">Formato de foto no aceptado.</div>
