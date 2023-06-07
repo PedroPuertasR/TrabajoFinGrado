@@ -9,31 +9,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.EmpleadoRepository;
-import com.pedropuertas.dam.tiendatatuajes.repositorio.UserRepository;
-import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioFinder;
-import com.pedropuertas.dam.tiendatatuajes.seguridad.SecurityConfig;
 import com.pedropuertas.dam.tiendatatuajes.servicio.base.ServicioBaseImpl;
 
 @Service
 public class EmpleadoService extends ServicioBaseImpl <Empleado, Long, EmpleadoRepository>{
 	
 	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\img\\";
-	
-	@Autowired 
-	private SecurityConfig sec;
-
-	@Autowired
-	private UsuarioFinder user;
-	
-	@Autowired
-	private UserRepository listaUsuarios;
 	
 	public List <Empleado> buscarPorNombre(String nombre, List <Empleado> lista){
 		
@@ -59,17 +46,16 @@ public class EmpleadoService extends ServicioBaseImpl <Empleado, Long, EmpleadoR
         return a;
 	}
 	
-	public Empleado edit(Empleado a, MultipartFile file, boolean nuevo) {
-		return save(a, file, nuevo);
+	public Empleado edit(Empleado a, MultipartFile file) {
+		return save(a, file);
 	}
 	
-	public Empleado save(Empleado a, MultipartFile file, boolean nuevo) {
-		if(nuevo) {
-			Long id = listaUsuarios.cargarUsuarios().stream().count() + 1;
-			sec.crearUsuario(a.getArtistico(), a.getDni(), "ADMIN");
-			Usuario u = new Usuario(id, a.getArtistico(), a.getDni(), "ADMIN");
-			a.setUsuario(u);
-		}
+	public Empleado save(Empleado a, MultipartFile file) {
+		/*if(nuevo != null) {
+			nuevo.setUsername(a.getArtistico());
+			nuevo.setPassword(a.getDni());
+			a.setUsuario(nuevo);
+		}*/
 		
 		try {
 			return super.save(cambiarFoto(a, file));

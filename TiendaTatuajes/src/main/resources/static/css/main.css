@@ -8,6 +8,11 @@
     src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 }
 
+@font-face {
+    font-family: 'Abygaer';
+    src: url('../fonts/Abygaer\ Regular.otf');
+}
+
 html{
     height: 100%;
 }
@@ -27,6 +32,14 @@ main{
     color: white;
     font-family: 'Antic Slab';
     font-size: 14pt;
+}
+
+#titulo-brew h1{
+    margin-top: 2rem;
+    font-weight: 300;
+    font-family: 'Abygaer', Arial, sans-serif;
+    color: white;
+    font-size: 60pt;
 }
 
 p{
@@ -352,6 +365,10 @@ footer{
 
     #inicio img{
         width: 55%;
+    }
+
+    #titulo-brew h1{
+        font-size: 30pt;
     }
 
     .card-container {

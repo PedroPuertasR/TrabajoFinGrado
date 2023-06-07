@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioFinder;
+import com.pedropuertas.dam.tiendatatuajes.seguridad.SecurityConfig;
 import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ReservaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
@@ -38,6 +39,7 @@ public class EmpleadoController {
 	
 	@Autowired
 	private SalaService sala;
+	
 	
 	public EmpleadoController(EmpleadoService empleado) {
 		this.empleado = empleado;
@@ -60,7 +62,7 @@ public class EmpleadoController {
 	
 	@PostMapping("/nuevoEmpleado/submit")
 	public String procesarFormulario(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException {
-		empleado.save(a, file, true);
+		empleado.save(a, file);
 		return "redirect:/admin/empleados";
 	}
 	
@@ -80,7 +82,7 @@ public class EmpleadoController {
 
 	@PostMapping("/editarEmpleado/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException{
-		empleado.edit(a, file, false);
+		empleado.edit(a, file);
 		return "redirect:/admin/empleados";
 	}
 

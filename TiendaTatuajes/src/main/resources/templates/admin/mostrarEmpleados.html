@@ -82,14 +82,14 @@
 									<a th:href="${empleado.redes}" th:text="${empleado.redes}" target="_blank">Redes</a>
 								</td>
 								<td>
-									<div id="botones-operaciones" class="d-flex flex-row">
+									<div id="botones-operaciones" class="d-flex flex-row justify-content-center">
 										<a class="btn btn-warning" href="#" th:href="@{/admin/editarEmpleado/{id}(id=${empleado.id})}">
 											<i class="bi bi-pencil"></i>
-										</a> |
+										</a> <!--|
 										<button type="button" class="btn btn-danger" data-bs-toggle="modal"
 											data-bs-target="#myModal" th:attr="data-bs-target='#myModal' + ${empleado.id}">
 											<i class="bi bi-x-square"></i>
-										</button>
+										</button>-->
 									</div>
 									
 

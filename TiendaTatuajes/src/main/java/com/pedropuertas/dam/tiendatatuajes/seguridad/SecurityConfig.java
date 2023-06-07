@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.UserRepository;
 
 @Configuration
@@ -64,13 +65,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     }
     
-    public void crearUsuario(String username, String password, String rol) {
+    public Usuario crearUsuario(String username, String password, String rol) {
         UserDetails nuevoUsuario = User
                 .withUsername(username)
                 .password("{noop}" + password)
                 .roles(rol)
                 .build();
         userDetailsManager.createUser(nuevoUsuario);
+        
+        Long id = usuarios.cargarUsuarios().stream().count() + 1;
+        
+        return new Usuario(id, "temp", "temp", "ADMIN");
         
     }
     
