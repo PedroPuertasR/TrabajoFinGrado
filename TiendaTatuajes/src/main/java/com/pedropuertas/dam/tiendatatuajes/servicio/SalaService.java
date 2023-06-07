@@ -3,11 +3,14 @@ package com.pedropuertas.dam.tiendatatuajes.servicio;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Sala;
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.SalaRepository;
 import com.pedropuertas.dam.tiendatatuajes.servicio.base.ServicioBaseImpl;
 
@@ -63,6 +66,17 @@ public class SalaService extends ServicioBaseImpl <Sala, Long, SalaRepository>{
 		settearEmpleado(a, lista);
 		
 		return super.edit(a);
+	}
+	
+	public List <Sala> findSalaUsuario(List <Sala> lista, Optional <Usuario> user){
+		
+		if(user.get().getUsername().equalsIgnoreCase("admin")) {
+			return lista;
+		}else {
+			return lista.stream()
+					.filter(x -> x.getEmpleado().getId() == user.get().getId())
+					.collect(Collectors.toList());
+		}
 	}
 
 	

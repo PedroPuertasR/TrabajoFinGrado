@@ -1,7 +1,14 @@
-INSERT INTO EMPLEADO (id, nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico) VALUES(1, 'Pedro', 'Rodríguez Martínez', '44363665T', '631406200', 'pedrorodriguez93@hotmail.com', '342146458171', 'ES7330248301408045328675', 1200.0, 'wavebuto.png', 'https://www.instagram.com/wavebuto/', 'WaveButo');
-INSERT INTO EMPLEADO (id, nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico) VALUES(2, 'Clara', 'García López', '42756159X', '679380814', 'claragarcia89@gmail.com', '065553342250', 'ES8730835851574872414151', 1500.0, 'graceneutral.png', 'https://www.instagram.com/graceneutral/', 'Grace Neutral');
-INSERT INTO EMPLEADO (id, nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico) VALUES(3, 'Sofía', 'Martínez García', '55878709W', '629113701', 'sofiagarcia.mtz@gmail.com', '273787200759', 'ES3830608332970702997455', 1000.0, 'marlenne.jpg', 'https://www.instagram.com/marlennetattoo/', 'MarlenneTattoos');
-INSERT INTO EMPLEADO (id, nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico) VALUES(4, 'Alejandro', 'López Rodríguez', '94570231G', '691060346', 'alejandrolr10@yahoo.com', '108228433141', 'ES9820109960100321803729', 1200.0, 'mannytattoo.jpg', 'https://www.instagram.com/mannytatt/', 'MannyTattoos');
+INSERT INTO USUARIO (id, username, password, rol) VALUES (1, 'pedroro', 'pedroro', 'ADMIN');
+INSERT INTO USUARIO (id, username, password, rol) VALUES (2, 'claragar', 'claragar', 'ADMIN');
+INSERT INTO USUARIO (id, username, password, rol) VALUES (3, 'sofiamar', 'sofiamar', 'ADMIN');
+INSERT INTO USUARIO (id, username, password, rol) VALUES (4, 'alejandrolo', 'alejandrolo', 'ADMIN');
+INSERT INTO USUARIO (id, username, password, rol) VALUES (5, 'admin', 'admin','ADMIN');
+
+INSERT INTO EMPLEADO (nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico, usuario_id) VALUES('Pedro', 'Rodríguez Martínez', '44363665T', '631406200', 'pedrorodriguez93@hotmail.com', '342146458171', 'ES7330248301408045328675', 1200.0, 'wavebuto.png', 'https://www.instagram.com/wavebuto/', 'WaveButo', 1);
+INSERT INTO EMPLEADO (nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico, usuario_id) VALUES('Clara', 'García López', '42756159X', '679380814', 'claragarcia89@gmail.com', '065553342250', 'ES8730835851574872414151', 1500.0, 'graceneutral.png', 'https://www.instagram.com/graceneutral/', 'Grace Neutral', 2);
+INSERT INTO EMPLEADO (nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico, usuario_id) VALUES('Sofía', 'Martínez García', '55878709W', '629113701', 'sofiagarcia.mtz@gmail.com', '273787200759', 'ES3830608332970702997455', 1000.0, 'marlenne.jpg', 'https://www.instagram.com/marlennetattoo/', 'MarlenneTattoos', 3);
+INSERT INTO EMPLEADO (nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico, usuario_id) VALUES('Alejandro', 'López Rodríguez', '94570231G', '691060346', 'alejandrolr10@yahoo.com', '108228433141', 'ES9820109960100321803729', 1200.0, 'mannytattoo.jpg', 'https://www.instagram.com/mannytatt/', 'MannyTattoos', 4);
+INSERT INTO EMPLEADO (nombre, apellidos, dni, telefono, email, seguridad_social, iban, salario, foto, redes, artistico, usuario_id) VALUES('Admin', 'Admin admin', '13259798E', '622060346', 'admin@gmail.com', '090033306872', 'ES0600833155515400944674', 2000.0, 'admin.png', 'https://www.instagram.com/admin/', 'Administrador', 5);
 
 INSERT INTO SALA(id, empleado_id) VALUES (1, 1);
 INSERT INTO SALA(id, empleado_id) VALUES (2, 3);

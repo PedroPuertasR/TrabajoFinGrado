@@ -15,5 +15,4 @@ public class ZonaService extends ServicioBaseImpl <Zona, Long, ZonaRepository>{
 	public List<Zona> buscarPorPrecio(Optional <Double> precio) {
 		return repositorio.findByPrecioFianza(precio);
 	}
-	
 }

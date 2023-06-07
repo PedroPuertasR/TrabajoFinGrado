@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Reserva;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
-import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioRepository;
+import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioFinder;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ReservaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ZonaService;
@@ -26,7 +26,7 @@ import com.pedropuertas.dam.tiendatatuajes.servicio.ZonaService;
 public class ReservaController {
 
 	@Autowired
-	private UsuarioRepository usuario;
+	private UsuarioFinder usuario;
 	
 	@Autowired
 	private ReservaService reserva;
@@ -54,9 +54,15 @@ public class ReservaController {
 	}
 	
 	@GetMapping ("/citas")
-	public String mostrarCitas(Model model) {
-		model.addAttribute("listaPendiente", reserva.findPendiente(reserva.findAll()));
-		model.addAttribute("listaReserva", reserva.findAceptadas(reserva.findAll()));
+	public String mostrarCitas(Model model, @AuthenticationPrincipal UserDetails userD) {
+		Optional <Usuario> user = usuario.findUserByUsername(userD.getUsername());
+		if(user.get().getUsername().equalsIgnoreCase("admin")) {
+			model.addAttribute("listaPendiente", reserva.findPendientes(reserva.findAll()));
+			model.addAttribute("listaReserva", reserva.findAceptadas(reserva.findAll()));
+		}else {
+			model.addAttribute("listaPendiente", reserva.findPendientes(reserva.findAll(), user));
+			model.addAttribute("listaReserva", reserva.findAceptadas(reserva.findAll(), user));
+		}
 		model.addAttribute("listaSala", sala.findAll());
 		model.addAttribute("listaZona", zona.findAll());
 		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));

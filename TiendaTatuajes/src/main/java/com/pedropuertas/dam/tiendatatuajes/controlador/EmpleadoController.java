@@ -1,8 +1,11 @@
 package com.pedropuertas.dam.tiendatatuajes.controlador;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
+import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioFinder;
 import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ReservaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
@@ -21,6 +26,9 @@ import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;
 @Controller
 @RequestMapping("/admin")
 public class EmpleadoController {
+	
+	@Autowired
+	private UsuarioFinder usuario;
 	
 	@Autowired
 	private EmpleadoService empleado;
@@ -36,8 +44,9 @@ public class EmpleadoController {
 	}
 	
 	@GetMapping("/empleados")
-	public String mostrarEmpleados(Model model) {
-		model.addAttribute("listaEmpleado", empleado.findAll());
+	public String mostrarEmpleados(Model model, @AuthenticationPrincipal UserDetails userD) {
+		Optional <Usuario> user = usuario.findUserByUsername(userD.getUsername());
+		model.addAttribute("listaEmpleado", empleado.findEmpleadoUsuario(empleado.findAll(), user));
 		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/mostrarEmpleados";
 	}
@@ -51,7 +60,7 @@ public class EmpleadoController {
 	
 	@PostMapping("/nuevoEmpleado/submit")
 	public String procesarFormulario(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException {
-		empleado.save(a, file);
+		empleado.save(a, file, true);
 		return "redirect:/admin/empleados";
 	}
 	
@@ -71,7 +80,7 @@ public class EmpleadoController {
 
 	@PostMapping("/editarEmpleado/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException{
-		empleado.edit(a, file);
+		empleado.edit(a, file, false);
 		return "redirect:/admin/empleados";
 	}
 

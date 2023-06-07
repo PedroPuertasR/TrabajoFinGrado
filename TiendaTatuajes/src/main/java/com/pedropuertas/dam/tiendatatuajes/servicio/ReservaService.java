@@ -3,12 +3,14 @@ package com.pedropuertas.dam.tiendatatuajes.servicio;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Reserva;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Sala;
+import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Zona;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.ReservaRepository;
 import com.pedropuertas.dam.tiendatatuajes.servicio.base.ServicioBaseImpl;
@@ -118,26 +120,28 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 		return super.edit(a);
 	}
 
-	public List<Reserva> findPendiente(List <Reserva> lista) {
+	public List<Reserva> findPendientes(List <Reserva> lista, Optional <Usuario> user) {
 		
 		List <Reserva> listaFinal;
 		
 		listaFinal = lista
 				.stream()
 				.filter(x -> !x.isAceptado())
+				.filter(x -> x.getSala().getEmpleado().getId() == user.get().getId())
 				.collect(Collectors.toList());
 		
 		return listaFinal;
 		
 	}
 
-	public List<Reserva> findAceptadas(List<Reserva> lista) {
+	public List<Reserva> findAceptadas(List<Reserva> lista, Optional <Usuario> user) {
 		
 		List <Reserva> listaFinal;
 		
 		listaFinal = lista
 				.stream()
 				.filter(x -> x.isAceptado())
+				.filter(x -> x.getSala().getEmpleado().getId() == user.get().getId())
 				.collect(Collectors.toList());
 		
 		return listaFinal;
@@ -157,6 +161,28 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 			return false;
 		}
 		
+	}
+
+	public List <Reserva> findPendientes(List<Reserva> lista) {
+		List <Reserva> listaFinal;
+		
+		listaFinal = lista
+				.stream()
+				.filter(x -> !x.isAceptado())
+				.collect(Collectors.toList());
+		
+		return listaFinal;
+	}
+	
+	public List <Reserva> findAceptadas(List<Reserva> lista) {
+		List <Reserva> listaFinal;
+		
+		listaFinal = lista
+				.stream()
+				.filter(x -> x.isAceptado())
+				.collect(Collectors.toList());
+		
+		return listaFinal;
 	}
 	
 }

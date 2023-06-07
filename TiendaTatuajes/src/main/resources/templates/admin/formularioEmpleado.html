@@ -93,7 +93,7 @@
 
 					<div class="mb-1 mt-3 me-3">
 						<label class="me-3" for="image">Foto</label>
-						<input class="border border-black-1 form-input" type="file" name="image" id="image" required>
+						<input class="border border-black-1 form-input" type="file" name="image" id="image">
 					</div>
 
 					<div class="mensajeError text-danger" id="errorFoto">Formato de foto no aceptado.</div>
@@ -113,6 +113,8 @@
 
 					<div class="mensajeError text-danger" id="errorRedes">Redes incorrectas.</div>
 
+					<input type="hidden" id="usuario" name="usuario" th:if="${empleado.id} != 0" th:value="*{usuario.id}">
+
 					<div class="mb-3 mt-3">
 						<a class="mb-3 me-3" th:href="@{/admin/empleados}" href="empleados">
 							<button type="submit" class="btn btn-light mt-3">
@@ -127,7 +129,7 @@
 		</article>
 	</main>
 
-	<footer th:replace="~{fragmentos/footerAdminChild::footer}"> </footer>
+	<footer th:replace="~{fragmentos/footer::footer}"> </footer>
 </body>
 
 </html>
