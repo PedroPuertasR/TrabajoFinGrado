@@ -18,6 +18,8 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script src="/js/pages.js" type="text/javascript" defer></script>
+
 	<title>Mostrar salas Brew Tattoos</title>
 </head>
 
@@ -47,29 +49,28 @@
 				</div>
 
 				<div class="container table-responsive">
-					<table class="table table-dark table-hover">
+					<table id="tabla-paginacion" class="table table-dark table-hover">
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>Tatuador</th>
-								<th>Operaciones</th>
+								<!--<th>Operaciones</th>-->
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="sala : ${listaSala}">
 								<td th:text="${sala.id}">1</td>
-								<td th:text="${sala.empleado}">Tatuador</td>
-								<td>
+								<td th:text="${sala.empleado.nombreCompleto}">Tatuador</td>
+								<!--<td>
 									<a class="btn btn-warning" href="#"
 										th:href="@{/admin/editarSala/{id}(id=${sala.id})}">
 										<i class="bi bi-pencil"></i>
-									</a> |
+									</a>|
 									<button type="button" class="btn btn-danger" data-bs-toggle="modal"
 										data-bs-target="#myModal" th:attr="data-bs-target='#myModal' + ${sala.id}">
 										<i class="bi bi-x-square"></i>
 									</button>
 
-									<!-- Modal -->
 									<div class="modal fade" id="myModal" th:id="'myModal' + ${sala.id}" tabindex="-1"
 										aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
@@ -90,7 +91,7 @@
 											</div>
 										</div>
 									</div>
-								</td>
+								</td>-->
 							</tr>
 						</tbody>
 					</table>
@@ -100,6 +101,10 @@
 		</article>
 
 	</main>
+
+	<footer th:replace="~{fragmentos/footer::footer}">
+
+	</footer>
 </body>
 
 </html>

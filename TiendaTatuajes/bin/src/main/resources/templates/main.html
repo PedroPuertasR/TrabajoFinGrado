@@ -57,6 +57,19 @@
 				<button class="btn btn-light" type="button">Iniciar sesión</button>
 			</a>
 
+			<div class="dropdown me-3" sec:authorize="isAuthenticated()">
+				<button type="button" class="btn btn-light position-relative" data-bs-toggle="dropdown">
+					<i class="bi bi-bell-fill"></i>
+					<span th:unless="${existen}" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+					  <span class="visually-hidden">New alerts</span>
+					</span>
+				  </button>
+				<ul class="dropdown-menu">
+					<a th:unless="${existen}" class="dropdown-item" th:href="@{/admin/citas}">Tiene citas pendientes</a>
+					<p th:if="${existen}" class="dropdown-item">Todo tranquilo por aquí</p>
+				</ul>
+			</div>
+
 			<div class="dropdown" sec:authorize="isAuthenticated()">
 				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
 					sec:authentication="name">
@@ -77,13 +90,17 @@
 
 	<main class="container pb-3">
 
+		<div id="titulo-brew" class="justify-content-center text-center">
+			<h1>BREW TATTOOS</h1>
+		</div>
+		
 		<div data-aos="flip-left" id="inicio" class="d-flex justify-content-center mt-5">
 			<img src="img/logo.png" alt="Logo Brew Tattoos">
 		</div>
 
 		<div class="espacio" style="background-image: url(img/studio2.jpg);">
 			<div class="color-overlay d-flex justify-content-center align-items-center">
-				<h1 id="estudio" class="text-center">Estudio</h1>
+				<h1 id="estudio" class="text-center titulos">Estudio</h1>
 			</div>
 		</div>
 
@@ -105,58 +122,25 @@
 					</div>
 				</div>
 
-				<div id="cartasRow" class="d-flex flex-row justify-content-center" data-aos="flip-left">
-					<div class="card border-5 me-5 ms-5 mb-5 text-center">
-						<img class="card-img-top mt-2" src="img/wavebuto.png" alt="Wavebuto card" />
-						<div class="card-body">
-							<p class="card-title">Wavebuto</p>
-							<p class="card-text">Fine Line</p>
-							<a href="https://www.instagram.com/wavebuto" class="btn btn-dark"
-								target="_blank">Trabajo</a>
-						</div>
-					</div>
-
-					<div class="card border-5 me-5 ms-5 mb-5 text-center" data-aos="flip-left">
-						<img class="card-img-top mt-2" src="img/mannytattoo.jpg" alt="MannyTattoo card" />
-						<div class="card-body">
-							<p class="card-title">MannyTattoo</p>
-							<p class="card-text">Fine Line</p>
-							<a href="https://www.instagram.com/mannytatt/" class="btn btn-dark"
-								target="_blank">Trabajo</a>
+				<div id="cartasRow">
+					<div class="card-container">
+						<div class="card border-5 text-center" th:each="emp : ${listaEmpleado}" data-aos="flip-left">
+							<img class="card-img-top mt-2" th:src="@{${emp.rutaImagen}}" th:alt="|Imagen de ${emp.artistico}|"/>
+							<div class="card-body">
+								<p class="card-title" th:text="${emp.artistico}">Nombre</p>
+								<p class="card-text" th:text="${emp.email}">Email</p>
+								<a th:href="${emp.redes}" class="btn btn-dark" target="_blank">Trabajo</a>
+							</div>
 						</div>
 					</div>
 				</div>
-
-				<div id="cartasRow2" class="d-flex flex-row justify-content-center">
-					<div class="card border-5 me-5 ms-5 mb-3 text-center" data-aos="flip-left">
-						<img class="card-img-top mt-2" src="img/marlenne.jpg" alt="MarlenneTattoo card" />
-						<div class="card-body">
-							<p class="card-title">MarlenneTattoo</p>
-							<p class="card-text">Blackwork</p>
-							<a href="https://www.instagram.com/marlennetattoo/" class="btn btn-dark"
-								target="_blank">Trabajo</a>
-						</div>
-					</div>
-
-					<div class="card border-5 me-5 ms-5 mb-3 text-center" data-aos="flip-left">
-						<img class="card-img-top mt-2" src="img/graceneutral.png" alt="Grace Neutral card" />
-						<div class="card-body">
-							<p class="card-title">Grace Neutral</p>
-							<p class="card-text">Handpoke</p>
-							<a href="https://www.instagram.com/graceneutral/" class="btn btn-dark"
-								target="_blank">Trabajo</a>
-						</div>
-					</div>
-				</div>
-
-
 			</div>
 		</article>
 
 		<article id="mapa">
 
 			<div class="espacio3 mt-5 mb-5 d-flex justify-content-center align-items-center">
-				<h1 class="text-center">Dónde estamos</h1>
+				<h1 class="text-center titulos">Dónde estamos</h1>
 			</div>
 
 			<div id="map-container-google-1" data-aos="fade-down"
@@ -171,11 +155,10 @@
 		<article class="m-auto" id="cita">
 
 			<div class="espacio3 mt-5 mb-5 d-flex justify-content-center align-items-center">
-				<h1 class="text-center">Pide cita</h1>
+				<h1 class="text-center titulos">Pide cita</h1>
 			</div>
 
-			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita()" action="https://formsubmit.co/el/sejivu">
-			<!--<form id="formularioCita" name="Formulario de reserva" method="GET" data-aos="fade-up" onsubmit="enviarEmail(); reset(); return false;">-->
+			<form id="formularioCita" name="Formulario de reserva" method="POST" data-aos="fade-up" onsubmit="return revisarFormularioCita();" th:action="@{/submit}" action="#">
 				<fieldset class="p-3">
 					<legend class="text-center">Solicitud de cita</legend>
 
@@ -266,19 +249,12 @@
 
 					<div class="mb-2 mensajeError text-danger" id="errorIdea">Formato de la idea no válido.</div>
 
-					<div>
-						<label for="foto">Si tienes algún diseño, súbelo aquí:</label> <br>
-						<br>
-						<input class="mb-2" type="file" id="foto" name="foto" accept="image/*">
-					</div>
-
-					<div class="mensajeError text-danger" id="errorFoto">Extensión no válida. Solo puede usar JPG, JPEG
-						o PNG.</div>
-
 					<div class="mb-3 mt-3">
 						<p>*Nos pondremos en contacto para ajustar el día de la cita
 							vía e-mail o teléfono</p>
 					</div>
+
+					<input type="hidden" id="mensaje" name="mensaje">
 
 					<button type="submit" id="enviar" class="btn btn-light mt-3">Enviar</button>
 				</fieldset>
@@ -289,8 +265,6 @@
 	</main>
 
 	<footer th:replace="~{fragmentos/footer::footer}"> </footer>
-
-	<!--<script src="https://smtpjs.com/v3/smtp.js"></script>-->
 
 	<script>
 		AOS.init();

@@ -46,16 +46,11 @@ public class EmpleadoService extends ServicioBaseImpl <Empleado, Long, EmpleadoR
         return a;
 	}
 	
-	public Empleado edit(Empleado a, MultipartFile file, Usuario nuevo) throws IOException {
-		return save(a, file, nuevo);
+	public Empleado edit(Empleado a, MultipartFile file) throws IOException {
+		return save(a, file);
 	}
 	
-	public Empleado save(Empleado a, MultipartFile file, Usuario nuevo) throws IOException {
-		if(nuevo != null) {
-			nuevo.setUsername(a.getArtistico());
-			nuevo.setPassword(a.getDni());
-			a.setUsuario(nuevo);
-		}
+	public Empleado save(Empleado a, MultipartFile file) throws IOException {
 		
 		if(file.getSize() == 0) {
 			return super.save(a);

@@ -61,9 +61,7 @@ public class EmpleadoController {
 	
 	@PostMapping("/nuevoEmpleado/submit")
 	public String procesarFormulario(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException {
-		long id = usuario.findAll().size() + 1;
-		Usuario u = new Usuario(id, a.getArtistico(), a.getDni(), "ADMIN");
-		empleado.save(a, file, u);
+		empleado.save(a, file);
 		return "redirect:/admin/empleados";
 	}
 	
@@ -83,8 +81,7 @@ public class EmpleadoController {
 
 	@PostMapping("/editarEmpleado/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException{
-		System.out.println("-------------------------------------------------" + file.getSize());
-		empleado.edit(a, file, null);
+		empleado.edit(a, file);
 		return "redirect:/admin/empleados";
 	}
 

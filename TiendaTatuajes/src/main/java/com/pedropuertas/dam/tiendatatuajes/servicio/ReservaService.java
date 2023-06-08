@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.pedropuertas.dam.tiendatatuajes.modelo.Reserva;
@@ -17,6 +21,9 @@ import com.pedropuertas.dam.tiendatatuajes.servicio.base.ServicioBaseImpl;
 
 @Service
 public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepository>{
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	private static final int numCitas = 2;
 	private static final double numDisenio = 200.0;
@@ -193,6 +200,16 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 				.collect(Collectors.toList());
 		
 		return listaFinal;
+	}
+
+	@Transactional
+	public void reiniciarSecuencia() {
+		String nombreSecuencia = "reserva_id_seq";
+	    
+	    String sql = "ALTER SEQUENCE " + nombreSecuencia + " RESTART WITH 55";
+	    
+	    entityManager.createNativeQuery(sql).executeUpdate();
+		
 	}
 	
 }

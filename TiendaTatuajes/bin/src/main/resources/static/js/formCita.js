@@ -97,17 +97,17 @@ function cambiarApariencia(campo, estado){
 	if(estado){
 		campo.classList.remove("border-danger");
 		campo.classList.add("border-success");
-		campo.parentNode.nextElementSibling.style.visibility = 'hidden';
+		campo.parentNode.nextElementSibling.style.display = 'none';
 	}
 	else{
 		campo.classList.remove("border-success");
 		campo.classList.add("border-danger");
-		campo.parentNode.nextElementSibling.style.visibility = 'visible';
+		campo.parentNode.nextElementSibling.style.display = 'block';
 	}
 		
 }
 
-function enviarEmail(){
+/*function enviarEmail(){
     Email.send({
         Host : "smtp.gmail.com",
         Username : "pruebatattoodam@gmail.com",
@@ -119,4 +119,4 @@ function enviarEmail(){
     }).then(
         message => alert("Mensaje enviado")
     );
-}
+}*/
