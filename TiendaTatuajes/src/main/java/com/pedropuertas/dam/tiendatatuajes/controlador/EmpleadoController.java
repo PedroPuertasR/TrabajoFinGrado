@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Empleado;
 import com.pedropuertas.dam.tiendatatuajes.modelo.Usuario;
 import com.pedropuertas.dam.tiendatatuajes.repositorio.UsuarioFinder;
-import com.pedropuertas.dam.tiendatatuajes.seguridad.SecurityConfig;
 import com.pedropuertas.dam.tiendatatuajes.servicio.EmpleadoService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.ReservaService;
 import com.pedropuertas.dam.tiendatatuajes.servicio.SalaService;

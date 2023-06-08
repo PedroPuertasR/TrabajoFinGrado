@@ -34,6 +34,18 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 		return listaFinal;
 	}
 	
+	public List <Reserva> buscarCliente(String nombre, List<Reserva> lista) {
+		List <Reserva> listaFinal = new ArrayList <Reserva>();
+		
+		for(Reserva r : lista) {
+			if(r.getCliente().toLowerCase().contains(nombre.toLowerCase())) {
+				listaFinal.add(r);
+			}
+		}
+		
+		return listaFinal;
+	}
+	
 	public int numeroReservasZona(Zona z) {
 		return repositorio.findNumReservasByZona(z);
 	}

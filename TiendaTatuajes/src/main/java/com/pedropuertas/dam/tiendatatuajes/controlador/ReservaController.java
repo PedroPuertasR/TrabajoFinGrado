@@ -70,9 +70,10 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/nuevaCita")
-	public String addCita(Model model) {
+	public String addCita(Model model, @AuthenticationPrincipal UserDetails userD) {
+		Optional <Usuario> user = usuario.findUserByUsername(userD.getUsername());
 		model.addAttribute("reserva", new Reserva());
-		model.addAttribute("sala", sala.findAll());
+		model.addAttribute("sala", sala.findSalaUsuario(sala.findAll(), user));
 		model.addAttribute("zona", zona.findAll());
 		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/formularioCita";
@@ -91,12 +92,13 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/editarCita/{id}")
-	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model,  @AuthenticationPrincipal UserDetails userD) {
 		Reserva reservaEditar = reserva.findById(id);
+		Optional <Usuario> user = usuario.findUserByUsername(userD.getUsername());
 
 		if (reservaEditar != null) {
 			model.addAttribute("reserva", reservaEditar);
-			model.addAttribute("sala", sala.findAll());
+			model.addAttribute("sala", sala.findSalaUsuario(sala.findAll(), user));
 			model.addAttribute("zona", zona.findAll());
 			model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 			return "admin/formularioCita";
@@ -123,8 +125,15 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/citas/buscar")
-	public String buscar(Model model, @RequestParam String nombre) {
-		model.addAttribute("listaReserva", reserva.buscarTatuadores(nombre, reserva.findAll()));
+	public String buscar(Model model, @RequestParam String nombre, @AuthenticationPrincipal UserDetails userD) {
+		Optional <Usuario> user = usuario.findUserByUsername(userD.getUsername());
+		if(user.get().getUsername().equalsIgnoreCase("admin")) {
+			model.addAttribute("listaReserva", reserva.buscarTatuadores(nombre, reserva.findAceptadas(reserva.findAll())));
+			model.addAttribute("listaPendiente", reserva.buscarTatuadores(nombre, reserva.findPendientes(reserva.findAll())));
+		}else {
+			model.addAttribute("listaReserva", reserva.buscarCliente(nombre, reserva.findPendientes(reserva.findAll(), user)));
+			model.addAttribute("listaPendiente", reserva.buscarCliente(nombre, reserva.findPendientes(reserva.findAll(), user)));
+		}
 		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
 		return "admin/mostrarCitas";
 	}
