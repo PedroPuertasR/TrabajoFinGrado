@@ -37,11 +37,9 @@ public class ReservaService extends ServicioBaseImpl <Reserva, Long, ReservaRepo
 	public List <Reserva> buscarCliente(String nombre, List<Reserva> lista) {
 		List <Reserva> listaFinal = new ArrayList <Reserva>();
 		
-		for(Reserva r : lista) {
-			if(r.getCliente().toLowerCase().contains(nombre.toLowerCase())) {
-				listaFinal.add(r);
-			}
-		}
+		listaFinal = lista.stream()
+				.filter(x -> x.getCliente().toLowerCase().contains(nombre.toLowerCase()))
+				.collect(Collectors.toList());
 		
 		return listaFinal;
 	}

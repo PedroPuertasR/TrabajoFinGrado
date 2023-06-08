@@ -131,7 +131,7 @@ public class ReservaController {
 			model.addAttribute("listaReserva", reserva.buscarTatuadores(nombre, reserva.findAceptadas(reserva.findAll())));
 			model.addAttribute("listaPendiente", reserva.buscarTatuadores(nombre, reserva.findPendientes(reserva.findAll())));
 		}else {
-			model.addAttribute("listaReserva", reserva.buscarCliente(nombre, reserva.findPendientes(reserva.findAll(), user)));
+			model.addAttribute("listaReserva", reserva.buscarCliente(nombre, reserva.findAceptadas(reserva.findAll(), user)));
 			model.addAttribute("listaPendiente", reserva.buscarCliente(nombre, reserva.findPendientes(reserva.findAll(), user)));
 		}
 		model.addAttribute("existen", reserva.hayPendientes(reserva.findAll()));
