@@ -54,24 +54,23 @@
 							<tr>
 								<th>ID</th>
 								<th>Tatuador</th>
-								<th>Operaciones</th>
+								<!--<th>Operaciones</th>-->
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="sala : ${listaSala}">
 								<td th:text="${sala.id}">1</td>
 								<td th:text="${sala.empleado.nombreCompleto}">Tatuador</td>
-								<td>
+								<!--<td>
 									<a class="btn btn-warning" href="#"
 										th:href="@{/admin/editarSala/{id}(id=${sala.id})}">
 										<i class="bi bi-pencil"></i>
-									</a> |
+									</a>|
 									<button type="button" class="btn btn-danger" data-bs-toggle="modal"
 										data-bs-target="#myModal" th:attr="data-bs-target='#myModal' + ${sala.id}">
 										<i class="bi bi-x-square"></i>
 									</button>
 
-									<!-- Modal -->
 									<div class="modal fade" id="myModal" th:id="'myModal' + ${sala.id}" tabindex="-1"
 										aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
@@ -92,7 +91,7 @@
 											</div>
 										</div>
 									</div>
-								</td>
+								</td>-->
 							</tr>
 						</tbody>
 					</table>
