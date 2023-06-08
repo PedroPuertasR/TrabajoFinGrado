@@ -61,7 +61,9 @@ public class EmpleadoController {
 	
 	@PostMapping("/nuevoEmpleado/submit")
 	public String procesarFormulario(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException {
-		empleado.save(a, file);
+		long id = usuario.findAll().size() + 1;
+		Usuario u = new Usuario(id, a.getArtistico(), a.getDni(), "ADMIN");
+		empleado.save(a, file, u);
 		return "redirect:/admin/empleados";
 	}
 	
@@ -81,18 +83,21 @@ public class EmpleadoController {
 
 	@PostMapping("/editarEmpleado/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("empleado") Empleado a, @RequestParam("image") MultipartFile file) throws IOException{
-		empleado.edit(a, file);
+		System.out.println("-------------------------------------------------" + file.getSize());
+		empleado.edit(a, file, null);
 		return "redirect:/admin/empleados";
 	}
 
 	@GetMapping("/borrarEmpleado/{id}")
 	public String borrar(@PathVariable("id") long id, Model model) {
 		Empleado e = empleado.findById(id);
+		Usuario u = usuario.findById(e.getId()).orElse(null);
 		
 		if(e != null) {
 			if(sala.buscarPorEmpleado(e) == 0) {
 				model.addAttribute("empleado", e);
 				empleado.delete(e);
+				usuario.delete(u);
 			}else {
 				return "redirect:/admin/empleados?error=true";
 			}

@@ -96,6 +96,8 @@
 						<input class="border border-black-1 form-input" type="file" name="image" id="image">
 					</div>
 
+					<input type="hidden" id="foto" name="foto" th:field="*{foto}" th:value="*{foto}">
+
 					<div class="mensajeError text-danger" id="errorFoto">Formato de foto no aceptado.</div>
 
 					<div class="mb-3 mt-3">
@@ -113,7 +115,7 @@
 
 					<div class="mensajeError text-danger" id="errorRedes">Redes incorrectas.</div>
 
-					<input type="hidden" id="usuario" name="usuario" th:if="${empleado.id} != 0" th:value="*{usuario.id}">
+					<input th:if="*{usuario != null}" type="hidden" id="usuario" name="usuario" th:value="*{usuario.id}">
 
 					<div class="mb-3 mt-3">
 						<a class="mb-3 me-3" th:href="@{/admin/empleados}" href="empleados">
