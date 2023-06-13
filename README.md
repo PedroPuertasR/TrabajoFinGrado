@@ -10,7 +10,7 @@ Durante el desarrollo me enfoqué bastante en la organización de este y en la i
 
 Pueden ampliar información accediendo a la documentación del proyecto en la carpeta raíz del repositorio.
 
-AVISO: El email utilizado en este trabajo no sigue activo, por lo que si necesitan comprobarlo pueden seguir el siguiente tutorial para la configuración: https://youtu.be/ugIUObNHZdo?list=PLRt6K4SwclpZO5q7QV-89lBDsSD9FDrfD&t=173
+AVISO: El email utilizado en este trabajo no sigue activo, por lo que si necesitan comprobarlo pueden seguir el siguiente tutorial para la configuración: https://youtu.be/ugIUObNHZdo?t=173
 
 Un saludo.
 
